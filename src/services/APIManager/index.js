@@ -24,7 +24,9 @@ API.interceptors.request.use(
 export default class APIManager {
   static async getDatas() {
     const path = querystring.stringify({
-      q: 'science',
+      q: 'christmas',
+      sortBy: 'publishedAt',
+      language: 'en',
       pageSize: 4
     });
 
