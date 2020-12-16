@@ -3,7 +3,10 @@ import { useEffect, useState } from 'react';
 
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
+import { message } from 'antd';
 import shortid from 'shortid';
+
+import 'antd/dist/antd.css';
 
 import APIManager from 'services/APIManager';
 
@@ -19,18 +22,27 @@ const useStyles = makeStyles(() => ({
 const Home = () => {
   const classes = useStyles();
   const [news, setNews] = useState([]);
-  const [totalNews, setTotalNews] = useState(0)
+  const [totalNews, setTotalNews] = useState(0);
 
   useEffect(() => {
-    const fetchNews = async () => {
-      const { articles, totalResults } = await APIManager.getDatas();
-      console.log("fetchNews -> totalResults", totalResults)
-      // console.log('fetchNews -> articles', articles);
-      setTotalNews(totalResults);
-      setNews(articles);
-    };
+    setInterval(async () => {
+      try {
+        const { articles, totalResults } = await APIManager.getDatas();
 
-    fetchNews();
+        setTotalNews((totalNews) => {
+          if (totalNews !== totalResults) {
+            setNews(articles);   // rerender card medias
+            return totalResults;
+          } else {
+            message.loading('Looking for news...', 3);
+            return totalNews;
+          }
+        });
+      } catch (error) {
+        console.error(error);
+        message.error('An error occured', 3);
+      }
+    }, 15 * 1000); // fetch news every 15 sec
   }, []);
   return (
     <>
