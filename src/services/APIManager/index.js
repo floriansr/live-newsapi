@@ -10,7 +10,7 @@ API.interceptors.request.use(
     headers: {
       ...headers,
       'Content-Type': 'application/json',
-      Authorization: process.env.NEXT_PUBLIC_NEWS_API_KEY
+      Authorization: process.env.NEXT_PUBLIC_NEWSAPI_KEY
     }
   }),
   (error) => {
