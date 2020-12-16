@@ -1,7 +1,7 @@
 import axios from 'axios';
-import querystring from "querystring"
+import querystring from 'querystring';
 
-const proxy = "https://cors-anywhere.herokuapp.com/"
+const proxy = 'https://cors-anywhere.herokuapp.com/';
 
 const API = axios.create({
   baseURL: `${proxy}https://newsapi.org/`

@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-
 import shortid from 'shortid';
 
 import APIManager from 'services/APIManager';
@@ -17,9 +16,8 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-
 const Home = () => {
-    const classes = useStyles();
+  const classes = useStyles();
 
   const [news, setNews] = useState([]);
   useEffect(() => {
