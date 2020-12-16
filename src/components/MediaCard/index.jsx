@@ -18,6 +18,11 @@ const useStyles = makeStyles({
     alignItems: 'center',
     height: 180
   },
+  modalContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    cursor: 'pointer'
+  },
   modalDescription: {
     outline: 'none',
     cursor: 'pointer',
@@ -62,6 +67,7 @@ const MediaCard = ({ article }) => {
       <Modal
         open={open}
         onClose={modalAction}
+        className={classes.modalContainer}
         aria-labelledby={article.title}
         aria-describedby={article.description}>
         <div
