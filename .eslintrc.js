@@ -44,6 +44,8 @@ module.exports = {
     'no-console': 0, // check if console.log
     quotes: [2, 'single', { avoidEscape: true }],
     'jsx-a11y/media-has-caption': 0,
+    'jsx-a11y/click-events-have-key-events': 1,
+    'jsx-a11y/no-static-element-interactions': 1,
     'jsx-a11y/label-has-associated-control': [
       1,
       {
