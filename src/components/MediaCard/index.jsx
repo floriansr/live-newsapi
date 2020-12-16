@@ -21,7 +21,7 @@ const MediaCard = ({ article }) => {
             image={article.urlToImage}
             title={article.title}
           />
-          <CardContent className={classes.root}>
+          <CardContent>
             <Typography gutterBottom variant="h6" component="h6">
               {article.title}
             </Typography>
