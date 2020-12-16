@@ -51,7 +51,7 @@ const MediaCard = ({ article }) => {
             component="img"
             alt={article.description}
             height="140"
-            image={article.urlToImage}
+            image={article.urlToImage || '/no_image.jpeg'}
             title={article.title}
           />
           <CardContent className={classes.cardContentContainer}>
