@@ -18,12 +18,15 @@ const useStyles = makeStyles(() => ({
 
 const Home = () => {
   const classes = useStyles();
-
   const [news, setNews] = useState([]);
+  const [totalNews, setTotalNews] = useState(0)
+
   useEffect(() => {
     const fetchNews = async () => {
-      const { articles } = await APIManager.getDatas();
-      console.log('fetchNews -> articles', articles);
+      const { articles, totalResults } = await APIManager.getDatas();
+      console.log("fetchNews -> totalResults", totalResults)
+      // console.log('fetchNews -> articles', articles);
+      setTotalNews(totalResults);
       setNews(articles);
     };
 
