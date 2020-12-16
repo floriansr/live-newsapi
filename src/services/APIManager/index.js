@@ -1,7 +1,10 @@
 import axios from 'axios';
+import querystring from "querystring"
+
+const proxy = "https://cors-anywhere.herokuapp.com/"
 
 const API = axios.create({
-  baseURL: 'https://cors-anywhere.herokuapp.com/https://newsapi.org/'
+  baseURL: `${proxy}https://newsapi.org/`
 });
 
 API.interceptors.request.use(
@@ -20,8 +23,12 @@ API.interceptors.request.use(
 
 export default class APIManager {
   static async getDatas() {
-    const res = await API.get('v2/top-headlines?category=science');
-    console.log("APIManager -> getDatas -> res", res)
+    const path = querystring.stringify({
+      q: 'science',
+      pageSize: 4
+    });
+
+    const res = await API.get(`v2/everything?${path}`);
     return res.data;
   }
 }
