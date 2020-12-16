@@ -6,7 +6,7 @@ import shortid from 'shortid';
 
 import APIManager from 'services/APIManager';
 
-import MediaCards from 'components/MediaCards';
+import MediaCard from 'components/MediaCard';
 
 const Home = () => {
   const [news, setNews] = useState([]);
@@ -25,7 +25,7 @@ const Home = () => {
         {news.length !== 0 &&
           news.map((article) => (
             <Grid item xs key={shortid.generate()}>
-              <MediaCards article={article} />
+              <MediaCard article={article} />
             </Grid>
           ))}
       </Grid>
