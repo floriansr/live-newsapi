@@ -1,16 +1,18 @@
 import * as React from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import APIManager from 'services/APIManager';
 
 const Home = () => {
+  const [news, setNews] = useState([])
   useEffect(() => {
-    const fetch = async () => {
-      const res = await APIManager.getDatas();
-      console.log('Home -> res', res);
+    const fetchNews = async () => {
+      const {articles} = await APIManager.getDatas();
+      console.log("fetchNews -> articles", articles)
+      setNews(articles)
     };
 
-    fetch();
+    fetchNews();
   }, []);
   return (
     <>
