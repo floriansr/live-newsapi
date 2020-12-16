@@ -39,8 +39,6 @@ const MediaCard = ({ article }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
-  console.log('MediaCard -> article', article);
-
   const modalAction = () => {
     open ? setOpen(false) : setOpen(true);
   };
