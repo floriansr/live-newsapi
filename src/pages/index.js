@@ -19,12 +19,27 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const Home = ({ articles }) => { // passing articles by props (fast refresh)
+const Home = () => {
+  // As we use proxy to get our app on production environment (Plan: Developer - free account), we can't use SSG !
   const classes = useStyles();
-  const [news, setNews] = useState(articles);
+  const [news, setNews] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [totalNews, setTotalNews] = useState(0);
 
   useEffect(() => {
+    const fetchNews = async () => {
+      //  That's why, to save time, we will instantly fetch before setInterval is triggered
+      try {
+        const { articles } = await APIManager.getDatas();
+        setNews(articles);
+        message.success('Welcome..!', 3);
+      } catch (error) {
+        message.error('An error occured', 3);
+      }
+    };
+
+    fetchNews();
+
     setInterval(async () => {
       try {
         const { articles, totalResults } = await APIManager.getDatas();
@@ -51,31 +66,15 @@ const Home = ({ articles }) => { // passing articles by props (fast refresh)
         spacing={3}
         alignItems="center"
         className={classes.gridContainer}>
-        {news.map((article) => (
-          <Grid item xs key={shortid.generate()}>
-            <MediaCard article={article} />
-          </Grid>
-        ))}
+        {news.length !== 0 &&
+          news.map((article) => (
+            <Grid item xs key={shortid.generate()}>
+              <MediaCard article={article} />
+            </Grid>
+          ))}
       </Grid>
     </>
   );
 };
 
 export default Home;
-
-// This function gets called at build time on server-side.
-// It may be called again, on a serverless function, if
-// revalidation is enabled and a new request comes in
-export const getStaticProps = async () => {
-  console.log('x');
-  const { articles } = await APIManager.getDatas();
-  console.log('getStaticProps -> articles', articles);
-  return {
-    props: { articles },
-
-    // Next.js will attempt to re-generate the page:
-    // - When a request comes in
-    // - At most once every second
-    revalidate: 1 // In seconds };
-  };
-};
