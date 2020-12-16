@@ -17,6 +17,16 @@ const useStyles = makeStyles({
     textAlign: 'center',
     alignItems: 'center',
     height: 180
+  },
+  modalDescription: {
+    outline: 'none',
+    cursor: 'pointer',
+    backgroundColor: 'white',
+    opacity: '0.95',
+    borderRadius: '1rem',
+    padding: '2rem',
+    maxWidth: '40%',
+    margin: '0 auto'
   }
 });
 
@@ -57,7 +67,7 @@ const MediaCard = ({ article }) => {
         <div
           onClick={modalAction}
           role="presentation" // accessibility
-        >
+          className={classes.modalDescription}>
           <p>{article.description}</p>
         </div>
       </Modal>
