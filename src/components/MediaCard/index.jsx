@@ -8,7 +8,20 @@ import {
   Typography
 } from '@material-ui/core';
 
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  cardContentContainer: {
+    display: 'grid',
+    textAlign: 'center',
+    alignItems: 'center',
+    height: 180
+  }
+});
+
 const MediaCard = ({ article }) => {
+  const classes = useStyles();
+
   console.log('MediaCard -> article', article);
   return (
     <>
@@ -21,7 +34,7 @@ const MediaCard = ({ article }) => {
             image={article.urlToImage}
             title={article.title}
           />
-          <CardContent>
+          <CardContent className={classes.cardContentContainer}>
             <Typography gutterBottom variant="h6" component="h6">
               {article.title}
             </Typography>
