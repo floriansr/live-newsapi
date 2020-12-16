@@ -1,10 +1,12 @@
 import * as React from 'react';
+import { useState } from 'react';
 
 import {
   Card,
   CardActionArea,
   CardContent,
   CardMedia,
+  Modal,
   Typography
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -15,17 +17,38 @@ const useStyles = makeStyles({
     textAlign: 'center',
     alignItems: 'center',
     height: 180
+  },
+  modalContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    cursor: 'pointer'
+  },
+  modalDescription: {
+    outline: 'none',
+    cursor: 'pointer',
+    backgroundColor: 'white',
+    opacity: '0.95',
+    borderRadius: '1rem',
+    padding: '2rem',
+    maxWidth: '40%',
+    margin: '0 auto'
   }
 });
 
 const MediaCard = ({ article }) => {
   const classes = useStyles();
+  const [open, setOpen] = useState(false);
 
   console.log('MediaCard -> article', article);
+
+  const modalAction = () => {
+    open ? setOpen(false) : setOpen(true);
+  };
+
   return (
     <>
       <Card>
-        <CardActionArea>
+        <CardActionArea onClick={modalAction}>
           <CardMedia
             component="img"
             alt={article.description}
@@ -40,6 +63,20 @@ const MediaCard = ({ article }) => {
           </CardContent>
         </CardActionArea>
       </Card>
+
+      <Modal
+        open={open}
+        onClose={modalAction}
+        className={classes.modalContainer}
+        aria-labelledby={article.title}
+        aria-describedby={article.description}>
+        <div
+          onClick={modalAction}
+          role="presentation" // accessibility
+          className={classes.modalDescription}>
+          <p>{article.description}</p>
+        </div>
+      </Modal>
     </>
   );
 };
