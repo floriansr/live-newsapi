@@ -54,7 +54,12 @@ const MediaCard = ({ article }) => {
         onClose={modalAction}
         aria-labelledby={article.title}
         aria-describedby={article.description}>
+        <div
+          onClick={modalAction}
+          role="presentation" // accessibility
+        >
           <p>{article.description}</p>
+        </div>
       </Modal>
     </>
   );
