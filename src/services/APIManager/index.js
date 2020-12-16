@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'https://newsapi.org/'
+  baseURL: 'https://cors-anywhere.herokuapp.com/https://newsapi.org/'
 });
 
 API.interceptors.request.use(
