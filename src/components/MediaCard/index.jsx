@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 
 import {
   Card,
@@ -20,6 +21,7 @@ const useStyles = makeStyles({
 
 const MediaCard = ({ article }) => {
   const classes = useStyles();
+  const [open, setOpen] = useState(false);
 
   console.log('MediaCard -> article', article);
   return (
