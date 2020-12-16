@@ -24,10 +24,15 @@ const MediaCard = ({ article }) => {
   const [open, setOpen] = useState(false);
 
   console.log('MediaCard -> article', article);
+
+  const modalAction = () => {
+    open ? setOpen(false) : setOpen(true);
+  };
+
   return (
     <>
       <Card>
-        <CardActionArea>
+        <CardActionArea onClick={modalAction}>
           <CardMedia
             component="img"
             alt={article.description}
