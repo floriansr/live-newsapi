@@ -19,9 +19,9 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const Home = () => {
+const Home = ({ articles }) => { // passing articles by props (fast refresh)
   const classes = useStyles();
-  const [news, setNews] = useState([]);
+  const [news, setNews] = useState(articles);
   const [totalNews, setTotalNews] = useState(0);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const Home = () => {
 
         setTotalNews((totalNews) => {
           if (totalNews !== totalResults) {
-            setNews(articles);   // rerender card medias
+            setNews(articles); // rerender card medias
             return totalResults;
           } else {
             message.loading('Looking for news...', 3);
@@ -51,15 +51,31 @@ const Home = () => {
         spacing={3}
         alignItems="center"
         className={classes.gridContainer}>
-        {news.length !== 0 &&
-          news.map((article) => (
-            <Grid item xs key={shortid.generate()}>
-              <MediaCard article={article} />
-            </Grid>
-          ))}
+        {news.map((article) => (
+          <Grid item xs key={shortid.generate()}>
+            <MediaCard article={article} />
+          </Grid>
+        ))}
       </Grid>
     </>
   );
 };
 
 export default Home;
+
+// This function gets called at build time on server-side.
+// It may be called again, on a serverless function, if
+// revalidation is enabled and a new request comes in
+export const getStaticProps = async () => {
+  console.log('x');
+  const { articles } = await APIManager.getDatas();
+  console.log('getStaticProps -> articles', articles);
+  return {
+    props: { articles },
+
+    // Next.js will attempt to re-generate the page:
+    // - When a request comes in
+    // - At most once every second
+    revalidate: 1 // In seconds };
+  };
+};
