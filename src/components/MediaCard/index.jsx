@@ -6,6 +6,7 @@ import {
   CardActionArea,
   CardContent,
   CardMedia,
+  Modal,
   Typography
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -47,6 +48,14 @@ const MediaCard = ({ article }) => {
           </CardContent>
         </CardActionArea>
       </Card>
+
+      <Modal
+        open={open}
+        onClose={modalAction}
+        aria-labelledby={article.title}
+        aria-describedby={article.description}>
+          <p>{article.description}</p>
+      </Modal>
     </>
   );
 };
