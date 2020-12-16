@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 
-import APIManager from '../services/APIManager';
+import APIManager from 'services/APIManager';
 
 const Home = () => {
   useEffect(() => {
