@@ -6,6 +6,8 @@ import shortid from 'shortid';
 
 import APIManager from 'services/APIManager';
 
+import MediaCards from 'components/MediaCards';
+
 const Home = () => {
   const [news, setNews] = useState([]);
   useEffect(() => {
@@ -23,7 +25,7 @@ const Home = () => {
         {news.length !== 0 &&
           news.map((article) => (
             <Grid item xs key={shortid.generate()}>
-              <p>{article.title}</p>
+              <MediaCards article={article} />
             </Grid>
           ))}
       </Grid>
